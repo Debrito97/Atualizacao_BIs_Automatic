@@ -1,0 +1,2746 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
+print("**********************************************")
+print("Bem-vindo ao processo de Atualização dos BI's!")
+print("**********************************************\n")
+print("*******************************************************************************\n")
+print("Esteja previamente conectado ao SAP para que atualização ocorra normalmente.\n")
+print("O Tempo estimado é de 1h30 a 2h para a realização de todo o processo.\n")
+print("*******************************************************************************\n")
+import time
+import win32com.client
+import win32com.client as win32
+import pandas as pd
+import pyperclip
+import pyautogui
+
+# Conectar-se ao SAP GUI
+try:
+    SapGuiAuto = win32com.client.GetObject("SAPGUI")
+    if not type(SapGuiAuto) == win32com.client.CDispatch:
+        raise Exception("SAPGUI não encontrado.")
+except Exception as e:
+    print(e)
+    exit()
+
+application = SapGuiAuto.GetScriptingEngine
+
+# Verificar se a conexão já existe, senão, criar uma nova
+try:
+    connection = application.Children(0)
+except:
+    connection = None
+
+if not connection:
+    connection = application.Children(0)
+
+# Acessar a sessão
+try:
+    session = connection.Children(0)
+except:
+    session = None
+
+if not session:
+    session = connection.Children(0)
+
+############################## Verificação_87N-7UT_SIP5 ###################################
+try:
+        # Emular as ações do VBA
+        file_name = "Verificação_87N-7UT_SIP5"
+        print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+
+        if session:
+            session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+            session.findById("wnd[0]/tbar[0]/okcd").text = "/niw29"
+            session.findById("wnd[0]").sendVKey(0)
+            session.findById("wnd[0]/tbar[1]/btn[17]").press()
+            session.findById("wnd[1]/usr/txtV-LOW").text = "RELE_SIP-5"
+            session.findById("wnd[1]/usr/txtENAME-LOW").text = "KASCHIEWALDT"
+            session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 10
+            session.findById("wnd[1]/tbar[0]/btn[8]").press()
+            session.findById("wnd[0]/tbar[1]/btn[8]").press()
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(-1, "")
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+            session.findById("wnd[0]/tbar[1]/btn[16]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        else:
+            print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+        # Inicializa a aplicação Excel
+        excel = win32com.client.Dispatch("Excel.Application")
+
+        # Itera sobre todas as pastas de trabalho abertas
+        for wb in excel.Workbooks:
+            if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+                # Salva a pasta de trabalho no local especificado
+                wb.SaveAs(
+                    "https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Verificação_87N-7UT_SIP5.xlsx")
+                wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+                break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+        # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+        if not excel.Workbooks:
+            excel.Quit()
+
+        # Adiciona um atraso de 3 segundos
+        time.sleep(3)
+        print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+    print(f"*********************************************************************")
+    print(f"Não foi possível atualizar o arquivo: {file_name} !")
+    print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+    print(f"*********************************************************************\n")
+    wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+    pass
+############################## Ajuste-Porta5_SEL ###################################
+try:
+        # Emular as ações do VBA
+        file_name = "Ajuste-Porta5_SEL"
+        print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+
+        if session:
+            session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+            session.findById("wnd[0]/tbar[0]/okcd").text = "/niw29"
+            session.findById("wnd[0]").sendVKey(0)
+            session.findById("wnd[0]/tbar[1]/btn[17]").press()
+            session.findById("wnd[1]/usr/txtV-LOW").text = "PORTA5_SEL"
+            session.findById("wnd[1]/usr/txtENAME-LOW").text = "KASCHIEWALDT"
+            session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 10
+            session.findById("wnd[1]/tbar[0]/btn[8]").press()
+            session.findById("wnd[0]/tbar[1]/btn[8]").press()
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(-1, "")
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+            session.findById("wnd[0]/tbar[1]/btn[16]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        else:
+            print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+        # Inicializa a aplicação Excel
+        excel = win32com.client.Dispatch("Excel.Application")
+
+        # Itera sobre todas as pastas de trabalho abertas
+        for wb in excel.Workbooks:
+            if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+                # Salva a pasta de trabalho no local especificado
+                wb.SaveAs(
+                    "https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Ajuste-Porta5_SEL.xlsx")
+                wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+                break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+        # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+        if not excel.Workbooks:
+            excel.Quit()
+
+        # Adiciona um atraso de 3 segundos
+        time.sleep(3)
+        print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+    print(f"*********************************************************************")
+    print(f"Não foi possível atualizar o arquivo: {file_name} !")
+    print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+    print(f"*********************************************************************\n")
+    wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+    pass
+
+############################## Transportlink_3AP2-3 ###################################
+try:
+        # Emular as ações do VBA
+        file_name = "Transportlink_3AP2-3"
+        print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+
+        if session:
+            session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+            session.findById("wnd[0]/tbar[0]/okcd").text = "/niw29"
+            session.findById("wnd[0]").sendVKey(0)
+            session.findById("wnd[0]/tbar[1]/btn[17]").press()
+            session.findById("wnd[1]/usr/txtV-LOW").text = "TRANSP_LINK"
+            session.findById("wnd[1]/usr/txtENAME-LOW").text = "KASCHIEWALDT"
+            session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 11
+            session.findById("wnd[1]/tbar[0]/btn[8]").press()
+            session.findById("wnd[0]/tbar[1]/btn[8]").press()
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(-1, "")
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+            session.findById("wnd[0]/tbar[1]/btn[16]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        else:
+            print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+        # Inicializa a aplicação Excel
+        excel = win32com.client.Dispatch("Excel.Application")
+
+        # Itera sobre todas as pastas de trabalho abertas
+        for wb in excel.Workbooks:
+            if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+                # Salva a pasta de trabalho no local especificado
+                wb.SaveAs(
+                    "https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Transportlink_3AP2-3.xlsx")
+                wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+                break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+        # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+        if not excel.Workbooks:
+            excel.Quit()
+
+        # Adiciona um atraso de 3 segundos
+        time.sleep(3)
+        print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+    print(f"*********************************************************************")
+    print(f"Não foi possível atualizar o arquivo: {file_name} !")
+    print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+    print(f"*********************************************************************\n")
+    wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+    pass
+
+############################## Remoção_Contador-Miliamp ###################################
+try:
+        # Emular as ações do VBA
+        file_name = "Remoção_Contador-Miliamp"
+        print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+
+        if session:
+            session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+            session.findById("wnd[0]/tbar[0]/okcd").text = "/niw29"
+            session.findById("wnd[0]").sendVKey(0)
+            session.findById("wnd[0]/tbar[1]/btn[17]").press()
+            session.findById("wnd[1]/usr/txtV-LOW").text = "CONT_MILIAMP"
+            session.findById("wnd[1]/usr/txtENAME-LOW").text = "KASCHIEWALDT"
+            session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 12
+            session.findById("wnd[1]/tbar[0]/btn[8]").press()
+            session.findById("wnd[0]/tbar[1]/btn[8]").press()
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(-1, "")
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+            session.findById("wnd[0]/tbar[1]/btn[16]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        else:
+            print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+        # Inicializa a aplicação Excel
+        excel = win32com.client.Dispatch("Excel.Application")
+
+        # Itera sobre todas as pastas de trabalho abertas
+        for wb in excel.Workbooks:
+            if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+                # Salva a pasta de trabalho no local especificado
+                wb.SaveAs(
+                    "https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Remoção_Contador-Miliamp.xlsx")
+                wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+                break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+        # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+        if not excel.Workbooks:
+            excel.Quit()
+
+        # Adiciona um atraso de 3 segundos
+        time.sleep(3)
+        print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+    print(f"*********************************************************************")
+    print(f"Não foi possível atualizar o arquivo: {file_name} !")
+    print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+    print(f"*********************************************************************\n")
+    wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+    pass
+
+############################## IW49_Operacoes_Ordens_Diversas ###################################
+try:
+        # Emular as ações do VBA
+        file_name = "IW49_Operacoes_Ordens_Diversas"
+        print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+
+        if session:
+            session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+            session.findById("wnd[0]/tbar[0]/okcd").text = "/niw49"
+            session.findById("wnd[0]").sendVKey(0)
+            session.findById("wnd[0]/tbar[1]/btn[17]").press()
+            session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").selectedRows = "0"
+            session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").doubleClickCurrentCell()
+            session.findById("wnd[0]/tbar[1]/btn[8]").press()
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(-1, "")
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+            session.findById("wnd[0]/mbar/menu[0]/menu[6]").select()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        else:
+            print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+        # Inicializa a aplicação Excel
+        excel = win32com.client.Dispatch("Excel.Application")
+
+        # Itera sobre todas as pastas de trabalho abertas
+        for wb in excel.Workbooks:
+            if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+                # Salva a pasta de trabalho no local especificado
+                wb.SaveAs(
+                    "https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Ordens%20Diversas/IW49_Operacoes_Ordens_Diversas.xlsx")
+                wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+                break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+        # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+        if not excel.Workbooks:
+            excel.Quit()
+
+        # Adiciona um atraso de 3 segundos
+        time.sleep(3)
+        print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+    print(f"*********************************************************************")
+    print(f"Não foi possível atualizar o arquivo: {file_name} !")
+    print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+    print(f"*********************************************************************\n")
+    wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+    pass
+
+############################## IW47_Confirmacoes_Ordens_Diversas ###################################
+try:
+        # Emular as ações do VBA
+        file_name = "IW47_Confirmacoes_Ordens_Diversas"
+        print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+
+        if session:
+            session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+            session.findById("wnd[0]/tbar[0]/okcd").text = "/niw47"
+            session.findById("wnd[0]").sendVKey(0)
+            session.findById("wnd[0]/tbar[1]/btn[17]").press()
+            session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").selectedRows = "0"
+            session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").doubleClickCurrentCell()
+            session.findById("wnd[0]/tbar[1]/btn[8]").press()
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(-1, "")
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+            session.findById("wnd[0]/mbar/menu[0]/menu[6]").select()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        else:
+            print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+        # Inicializa a aplicação Excel
+        excel = win32com.client.Dispatch("Excel.Application")
+
+        # Itera sobre todas as pastas de trabalho abertas
+        for wb in excel.Workbooks:
+            if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+                # Salva a pasta de trabalho no local especificado
+                wb.SaveAs(
+                    "https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Ordens%20Diversas/IW47_Confirmacoes_Ordens_Diversas.xlsx")
+                wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+                break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+        # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+        if not excel.Workbooks:
+            excel.Quit()
+
+        # Adiciona um atraso de 3 segundos
+        time.sleep(3)
+        print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+    print(f"*********************************************************************")
+    print(f"Não foi possível atualizar o arquivo: {file_name} !")
+    print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+    print(f"*********************************************************************\n")
+    wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+    pass
+############################## Ensaio_Prot_TR-RE ###################################
+try:
+        # Emular as ações do VBA
+        file_name = "Ensaio_Prot_TR-RE"
+        print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+
+        if session:
+            session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+            session.findById("wnd[0]/tbar[0]/okcd").text = "/niw29"
+            session.findById("wnd[0]").sendVKey(0)
+            session.findById("wnd[0]/tbar[1]/btn[17]").press()
+            session.findById("wnd[1]/usr/txtV-LOW").text = "ENSAIO_TR-RE"
+            session.findById("wnd[1]/usr/txtENAME-LOW").text = "KASCHIEWALDT"
+            session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 12
+            session.findById("wnd[1]/tbar[0]/btn[8]").press()
+            session.findById("wnd[0]/tbar[1]/btn[8]").press()
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(-1, "")
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+            session.findById("wnd[0]/tbar[1]/btn[16]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        else:
+            print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+        # Inicializa a aplicação Excel
+        excel = win32com.client.Dispatch("Excel.Application")
+
+        # Itera sobre todas as pastas de trabalho abertas
+        for wb in excel.Workbooks:
+            if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+                # Salva a pasta de trabalho no local especificado
+                wb.SaveAs(
+                    "https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Ensaio_Prot_TR-RE.xlsx")
+                wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+                break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+        # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+        if not excel.Workbooks:
+            excel.Quit()
+
+        # Adiciona um atraso de 3 segundos
+        time.sleep(3)
+        print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+    print(f"*********************************************************************")
+    print(f"Não foi possível atualizar o arquivo: {file_name} !")
+    print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+    print(f"*********************************************************************\n")
+    wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+    pass
+############################## teste_prot_barras ###################################
+try:
+        # Emular as ações do VBA
+        file_name = "teste_prot_barras"
+        print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+
+        if session:
+            session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+            session.findById("wnd[0]/tbar[0]/okcd").text = "/niw29"
+            session.findById("wnd[0]").sendVKey(0)
+            session.findById("wnd[0]/tbar[1]/btn[17]").press()
+            session.findById("wnd[1]/usr/txtV-LOW").text = "TESTEPROTBARRA"
+            session.findById("wnd[1]/usr/txtENAME-LOW").text = "KASCHIEWALDT"
+            session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 14
+            session.findById("wnd[1]/tbar[0]/btn[8]").press()
+            session.findById("wnd[0]/tbar[1]/btn[8]").press()
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(-1, "")
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+            session.findById("wnd[0]/tbar[1]/btn[16]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        else:
+            print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+        # Inicializa a aplicação Excel
+        excel = win32com.client.Dispatch("Excel.Application")
+
+        # Itera sobre todas as pastas de trabalho abertas
+        for wb in excel.Workbooks:
+            if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+                # Salva a pasta de trabalho no local especificado
+                wb.SaveAs(
+                    "https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/teste_prot_barras.xlsx")
+                wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+                break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+        # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+        if not excel.Workbooks:
+            excel.Quit()
+
+        # Adiciona um atraso de 3 segundos
+        time.sleep(3)
+        print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+    print(f"*********************************************************************")
+    print(f"Não foi possível atualizar o arquivo: {file_name} !")
+    print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+    print(f"*********************************************************************\n")
+    wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+    pass
+############################## sistema-protecao_px40 ###################################
+try:
+        # Emular as ações do VBA
+        file_name = "sistema-protecao_px40"
+        print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+
+        if session:
+            session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+            session.findById("wnd[0]/tbar[0]/okcd").text = "/niw29"
+            session.findById("wnd[0]").sendVKey(0)
+            session.findById("wnd[0]/tbar[1]/btn[17]").press()
+            session.findById("wnd[1]/usr/txtV-LOW").text = "PROT_PX40"
+            session.findById("wnd[1]/usr/txtENAME-LOW").text = "KASCHIEWALDT"
+            session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 9
+            session.findById("wnd[1]/tbar[0]/btn[8]").press()
+            session.findById("wnd[0]/tbar[1]/btn[8]").press()
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(-1, "")
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+            session.findById("wnd[0]/tbar[1]/btn[16]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        else:
+            print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+        # Inicializa a aplicação Excel
+        excel = win32com.client.Dispatch("Excel.Application")
+
+        # Itera sobre todas as pastas de trabalho abertas
+        for wb in excel.Workbooks:
+            if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+                # Salva a pasta de trabalho no local especificado
+                wb.SaveAs(
+                    "https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/sistema-protecao_px40.xlsx")
+                wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+                break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+        # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+        if not excel.Workbooks:
+            excel.Quit()
+
+        # Adiciona um atraso de 3 segundos
+        time.sleep(3)
+        print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+    print(f"*********************************************************************")
+    print(f"Não foi possível atualizar o arquivo: {file_name} !")
+    print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+    print(f"*********************************************************************\n")
+    wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+    pass
+############################## habilitadores-oem_telecomando-cs ###################################
+try:
+        # Emular as ações do VBA
+        file_name = "habilitadores-oem_telecomando-cs"
+        print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+
+        if session:
+            session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+            session.findById("wnd[0]/tbar[0]/okcd").text = "/niw29"
+            session.findById("wnd[0]").sendVKey(0)
+            session.findById("wnd[0]/tbar[1]/btn[17]").press()
+            session.findById("wnd[1]/usr/txtV-LOW").text = "HABILIT_CS"
+            session.findById("wnd[1]/usr/txtENAME-LOW").text = "KASCHIEWALDT"
+            session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 10
+            session.findById("wnd[1]/tbar[0]/btn[8]").press()
+            session.findById("wnd[0]/tbar[1]/btn[8]").press()
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(-1, "")
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+            session.findById("wnd[0]/tbar[1]/btn[16]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        else:
+            print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+        # Inicializa a aplicação Excel
+        excel = win32com.client.Dispatch("Excel.Application")
+
+        # Itera sobre todas as pastas de trabalho abertas
+        for wb in excel.Workbooks:
+            if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+                # Salva a pasta de trabalho no local especificado
+                wb.SaveAs(
+                    "https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/habilitadores-oem_telecomando-cs.xlsx")
+                wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+                break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+        # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+        if not excel.Workbooks:
+            excel.Quit()
+
+        # Adiciona um atraso de 3 segundos
+        time.sleep(3)
+        print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+    print(f"*********************************************************************")
+    print(f"Não foi possível atualizar o arquivo: {file_name} !")
+    print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+    print(f"*********************************************************************\n")
+    wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+    pass
+############################## habilitadores-oem_telecomando-rl86 ###################################
+try:
+        # Emular as ações do VBA
+        file_name = "habilitadores-oem_telecomando-rl86"
+        print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+
+        if session:
+            session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+            session.findById("wnd[0]/tbar[0]/okcd").text = "/niw29"
+            session.findById("wnd[0]").sendVKey(0)
+            session.findById("wnd[0]/tbar[1]/btn[17]").press()
+            session.findById("wnd[1]/usr/txtV-LOW").text = "HABILIT_RL86"
+            session.findById("wnd[1]/usr/txtENAME-LOW").text = "KASCHIEWALDT"
+            session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 12
+            session.findById("wnd[1]/tbar[0]/btn[8]").press()
+            session.findById("wnd[0]/tbar[1]/btn[8]").press()
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(-1, "")
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+            session.findById("wnd[0]/tbar[1]/btn[16]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        else:
+            print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+        # Inicializa a aplicação Excel
+        excel = win32com.client.Dispatch("Excel.Application")
+
+        # Itera sobre todas as pastas de trabalho abertas
+        for wb in excel.Workbooks:
+            if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+                # Salva a pasta de trabalho no local especificado
+                wb.SaveAs(
+                    "https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/habilitadores-oem_telecomando-rl86.xlsx")
+                wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+                break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+        # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+        if not excel.Workbooks:
+            excel.Quit()
+
+        # Adiciona um atraso de 3 segundos
+        time.sleep(3)
+        print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+    print(f"*********************************************************************")
+    print(f"Não foi possível atualizar o arquivo: {file_name} !")
+    print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+    print(f"*********************************************************************\n")
+    wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+    pass
+############################## logica_transf_prot ###################################
+try:
+        # Emular as ações do VBA
+        file_name = "logica_transf_prot"
+        print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+
+        if session:
+            session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+            session.findById("wnd[0]/tbar[0]/okcd").text = "/niw29"
+            session.findById("wnd[0]").sendVKey(0)
+            session.findById("wnd[0]/tbar[1]/btn[17]").press()
+            session.findById("wnd[1]/usr/txtV-LOW").text = "TRANSF_PROT"
+            session.findById("wnd[1]/usr/txtENAME-LOW").text = "KASCHIEWALDT"
+            session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 6
+            session.findById("wnd[1]/tbar[0]/btn[8]").press()
+            session.findById("wnd[0]/tbar[1]/btn[8]").press()
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(-1, "")
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+            session.findById("wnd[0]/tbar[1]/btn[16]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        else:
+            print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+        # Inicializa a aplicação Excel
+        excel = win32com.client.Dispatch("Excel.Application")
+
+        # Itera sobre todas as pastas de trabalho abertas
+        for wb in excel.Workbooks:
+            if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+                # Salva a pasta de trabalho no local especificado
+                wb.SaveAs(
+                    "https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/logica_transf_prot.xlsx")
+                wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+                break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+        # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+        if not excel.Workbooks:
+            excel.Quit()
+
+        # Adiciona um atraso de 3 segundos
+        time.sleep(3)
+        print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+    print(f"*********************************************************************")
+    print(f"Não foi possível atualizar o arquivo: {file_name} !")
+    print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+    print(f"*********************************************************************\n")
+    wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+    pass
+############################## Revisao_DUO ###################################
+try:
+        # Emular as ações do VBA
+        file_name = "Revisao_DUO"
+        print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+
+        if session:
+            session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+            session.findById("wnd[0]/tbar[0]/okcd").text = "/niw29"
+            session.findById("wnd[0]").sendVKey(0)
+            session.findById("wnd[0]/tbar[1]/btn[17]").press()
+            session.findById("wnd[1]/usr/txtV-LOW").text = "REV_DUO"
+            session.findById("wnd[1]/usr/txtENAME-LOW").text = "KASCHIEWALDT"
+            session.findById("wnd[1]/usr/txtENAME-LOW").setFocus()
+            session.findById("wnd[1]/usr/txtENAME-LOW").caretPosition = 7
+            session.findById("wnd[1]/tbar[0]/btn[8]").press()
+            session.findById("wnd[0]/tbar[1]/btn[8]").press()
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(-1, "")
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+            session.findById("wnd[0]/tbar[1]/btn[16]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+            session.findById(
+                "wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        else:
+            print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+        # Inicializa a aplicação Excel
+        excel = win32com.client.Dispatch("Excel.Application")
+
+        # Itera sobre todas as pastas de trabalho abertas
+        for wb in excel.Workbooks:
+            if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+                # Salva a pasta de trabalho no local especificado
+                wb.SaveAs(
+                    "https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Revisao_DUO.xlsx")
+                wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+                break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+        # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+        if not excel.Workbooks:
+            excel.Quit()
+
+        # Adiciona um atraso de 3 segundos
+        time.sleep(3)
+        print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+    print(f"*********************************************************************")
+    print(f"Não foi possível atualizar o arquivo: {file_name} !")
+    print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+    print(f"*********************************************************************\n")
+    wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+    pass
+############################## Atualização BIOS_SEL ###################################
+try:
+    # Emular as ações do VBA
+        file_name = "Atualização_BIOS_SEL"
+        print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+        if session:
+            session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+            session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+            session.findById("wnd[0]").sendVKey(0)
+            session.findById("wnd[0]/tbar[1]/btn[17]").press()
+            session.findById("wnd[1]/usr/txtENAME-LOW").Text = "KASCHIEWALDT"
+            session.findById("wnd[1]/usr/txtENAME-LOW").SetFocus()
+            session.findById("wnd[1]/usr/txtENAME-LOW").caretPosition = 12
+            session.findById("wnd[1]/tbar[0]/btn[8]").press()
+            session.findById("wnd[1]/usr/cntlALV_CONTAINER_1/shellcont/shell").firstVisibleRow = 2
+            session.findById("wnd[1]").Close()
+            session.findById("wnd[0]/tbar[1]/btn[17]").press()
+            session.findById("wnd[1]/usr/txtV-LOW").Text = "BIOS-SEL"
+            session.findById("wnd[1]/usr/txtENAME-LOW").Text = "KASCHIEWALDT"
+            session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 8
+            session.findById("wnd[1]/tbar[0]/btn[8]").press()
+            session.findById("wnd[0]/tbar[1]/btn[8]").press()
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(-1, "")
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+            session.findById("wnd[0]/tbar[1]/btn[16]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+            session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+            session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+        else:
+            print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+        # Inicializa a aplicação Excel
+        excel = win32com.client.Dispatch("Excel.Application")
+
+        # Itera sobre todas as pastas de trabalho abertas
+        for wb in excel.Workbooks:
+            if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+                # Salva a pasta de trabalho no local especificado
+                wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Atualização_BIOS_SEL.xlsx")
+                wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+                break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+            # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+            if not excel.Workbooks:
+                excel.Quit()
+
+        # Adiciona um atraso de 3 segundos
+        time.sleep(3)
+        print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+        print(f"*********************************************************************")
+        print(f"Não foi possível atualizar o arquivo: {file_name} !")
+        print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+        print(f"*********************************************************************\n")
+        wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+        pass
+############################## Qualidade_Notas ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Qualidade_Notas"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane (97, 32, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "QUALI_NOTA"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "KASCHIEWALDT"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 10
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Qualidade_Notas.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+        print(f"*********************************************************************")
+        print(f"Não foi possível atualizar o arquivo: {file_name} !")
+        print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+        print(f"*********************************************************************\n")
+        wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+        pass
+############################## Notas_Desvio_24 ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Notas_Desvio_24"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 32, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "NOT_DEV_PYT"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "PWINNICZEK"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 11
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/usr/ctxtLTRMN-LOW").Text = "01.01.2024"
+        session.findById("wnd[0]/usr/ctxtLTRMN-HIGH").Text = "31.12.2024"
+        session.findById("wnd[0]/usr/ctxtLTRMN-HIGH").SetFocus()
+        session.findById("wnd[0]/usr/ctxtLTRMN-HIGH").caretPosition = 10
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/BackupDesvio24.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+
+    import os
+    import shutil
+    import numpy as np
+    import pandas as pd
+    from datetime import datetime
+
+    import matplotlib.pyplot as plt
+    from matplotlib import rcParams
+    from matplotlib.patches import ConnectionPatch
+
+    rcParams['axes.spines.top'] = False
+    rcParams['axes.spines.right'] = False
+
+    import sys
+    import re
+    import operator
+    import seaborn as sns
+
+    # Configurações padrão display row and columns
+    pd.options.display.max_rows = 1000
+    pd.set_option('display.max_columns', 1000)
+    pd.set_option('display.max_colwidth', None)
+    np.set_printoptions(threshold=sys.maxsize)
+    import warnings
+
+    warnings.filterwarnings("ignore")
+
+    desvio = pd.read_excel('C:/Users/soulan/INTERCONEXION ELECTRICA S.A. E.S.P\Base de Dados - ISA CTEEP - Manutenção - 01. Bases de Dados/BackupDesvio24.xlsx',
+        decimal=',',
+        sheet_name='Planilha1')
+
+    foto = pd.read_excel('C:/Users/soulan/INTERCONEXION ELECTRICA S.A. E.S.P/Base de Dados - ISA CTEEP - Manutenção - 01. Bases de Dados/Foto Plano Manutenção - 2024.xlsx',
+        decimal=',',
+        sheet_name='Planilha1')
+
+    desvio = desvio[~desvio['Nota'].isin(foto['Nota'])]
+    desvio = desvio[desvio['Data encermto.'].dt.year == 2024]
+    desvio = desvio.rename(columns={'Denominação.1':'Denominação_1','Prioridade.1':'Prioridade_2',
+                                   'Unnamed: 16':'Column17','Unnamed: 17':'Column18'})
+    desvio.to_excel('C:/Users/soulan/INTERCONEXION ELECTRICA S.A. E.S.P/Base de Dados - ISA CTEEP - Manutenção - 01. Bases de Dados/Notas_Desvio_24.xlsx',
+                    sheet_name='Planilha1', index=False)
+
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## IK07 - Vazamento_SF6 ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "IK07 - Vazamento_SF6"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/nIK07"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/usr/ctxtEQUNR-LOW").Text = "*"
+        session.findById("wnd[0]/usr/txtPTTXT-LOW").Text = "Vazamento*SF6*"
+        session.findById("wnd[0]/usr/ctxtMPTYP").Text = "I"
+        session.findById("wnd[0]").sendVKey(8)
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]").sendVKey(44)
+        session.findById("wnd[0]/usr/ctxtIDATEV").Text = "01.01.2023"
+        session.findById("wnd[0]/usr/ctxtIDATEB").Text = "31.12.9999"
+        session.findById("wnd[0]/usr/txtSELCOUNT").Text = "5000"
+        session.findById("wnd[0]/usr/ctxtVARIANT").Text = "/VAZAM_SF6"
+        session.findById("wnd[0]").sendVKey(8)
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/IK07 - Vazamento_SF6.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## IK17 - Qualificação Eqtos ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "IK17 - Qualificação Eqtos"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 32, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/nik07"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/usr/ctxtEQUNR-LOW").Text = "*"
+        session.findById("wnd[0]/usr/txtPTTXT-LOW").Text = "QUALIF*"
+        session.findById("wnd[0]/usr/ctxtMPTYP").Text = "C"
+        session.findById("wnd[0]/usr/ctxtMPTYP").SetFocus()
+        session.findById("wnd[0]/usr/ctxtMPTYP").caretPosition = 1
+        session.findById("wnd[0]").sendVKey(4)
+        session.findById("wnd[1]").Close()
+        session.findById("wnd[0]/usr/ctxtVARIANT").Text = "/FFC"
+        session.findById("wnd[0]/usr/ctxtVARIANT").SetFocus()
+        session.findById("wnd[0]/usr/ctxtVARIANT").caretPosition = 4
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[44]").press()
+        session.findById("wnd[0]/usr/txtSELCOUNT").Text = "1 "
+        session.findById("wnd[0]/usr/ctxtVARIANT").Text = "/FFC_QUAL_BI"
+        session.findById("wnd[0]/usr/ctxtVARIANT").SetFocus()
+        session.findById("wnd[0]/usr/ctxtVARIANT").caretPosition = 12
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/IK17 - Qualificação Eqtos.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## IK17 - Qualificação Eqtos2 ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "IK17 - Qualificação Eqtos2"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 32, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/nik07"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/usr/ctxtEQUNR-LOW").Text = "*"
+        session.findById("wnd[0]/usr/txtPTTXT-LOW").Text = "QUALIF*"
+        session.findById("wnd[0]/usr/ctxtMPTYP").Text = "C"
+        session.findById("wnd[0]/usr/ctxtVARIANT").Text = "/FFC"
+        session.findById("wnd[0]/usr/ctxtVARIANT").SetFocus()
+        session.findById("wnd[0]/usr/ctxtVARIANT").caretPosition = 4
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[44]").press()
+        session.findById("wnd[0]/usr/txtSELCOUNT").Text = "1"
+        session.findById("wnd[0]/usr/ctxtVARIANT").Text = "/FFC_QUA2_BI"
+        session.findById("wnd[0]/usr/ctxtVARIANT").SetFocus()
+        session.findById("wnd[0]/usr/ctxtVARIANT").caretPosition = 12
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/IK17 - Qualificação Eqtos2.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+
+############################## Notas Abertas ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Notas Abertas"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "NOTAS_ABER_23"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "PWINNICZEK"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 13
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/usr/ctxtLTRMN-HIGH").Text = "31.12.2024"
+        session.findById("wnd[0]/usr/ctxtLTRMN-HIGH").SetFocus()
+        session.findById("wnd[0]/usr/ctxtLTRMN-HIGH").caretPosition = 10
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Notas Abertas.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Execução Plano Manutenção - 2024 ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Execução Plano Manutenção - 2024"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 32, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "PLANO-2024"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "KASCHIEWALDT"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 10
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Execução Plano Manutenção - 2024.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Conteudo_PCB ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Conteudo_PCB"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 32, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/nik07"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/usr/ctxtEQUNR-LOW").Text = "*"
+        session.findById("wnd[0]/usr/txtPTTXT-LOW").Text = "*Conteudo de PCBs*"
+        session.findById("wnd[0]/usr/ctxtMPTYP").Text = "D"
+        session.findById("wnd[0]/usr/ctxtVARIANT").Text = "/FFC"
+        session.findById("wnd[0]/usr/ctxtVARIANT").SetFocus()
+        session.findById("wnd[0]/usr/ctxtVARIANT").caretPosition = 4
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[44]").press()
+        session.findById("wnd[0]/usr/txtSELCOUNT").Text = "1 "
+        session.findById("wnd[0]/usr/ctxtVARIANT").Text = "/FFC_QUALIF"
+        session.findById("wnd[0]/usr/ctxtVARIANT").SetFocus()
+        session.findById("wnd[0]/usr/ctxtVARIANT").caretPosition = 11
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Conteudo_PCB.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Plano_SAGE_IEC104 ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Plano_SAGE_IEC104"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "PLANO_IEC104"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "KASCHIEWALDT"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 12
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Plano_SAGE_IEC104.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Reles_P ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Reles_P"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "PLANO-RELE-P"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "KASCHIEWALDT"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 12
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Reles_P.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Insp_Seccionadoras_SAV_IENNE ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Insp_Seccionadoras_SAV_IENNE"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "INSP-SEC-SAV"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "KASCHIEWALDT"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 12
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Insp_Seccionadoras_SAV_IENNE.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Subst_Bobina_Abertura_3AP ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Subst_Bobina_Abertura_3AP"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(93, 32, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "SUBST-BOB-3AP"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "KASCHIEWALDT"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 13
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Subst_Bobina_Abertura_3AP.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Acompanhamento especial ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Acompanhamento especial"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 32, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "ACOMP_ESPEC"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "PWINNICZEK"
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Acompanhamento especial.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## IW29 - Bay Degradado ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "IW29 - Bay Degradado"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 32, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "BAY_DEGRAD"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "PWINNICZEK"
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/IW29 - Bay Degradado.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Acomp. Eqtos com PCB - Notas N4 Abertas ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Acomp. Eqtos com PCB - Notas N4 Abertas"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "EQTOS_PCB"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "PWINNICZEK"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 9
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Acomp. Eqtos com PCB - Notas N4 Abertas.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Notas_Anti-Disparo ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Notas_Anti-Disparo"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "DISP_COMUT"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "PWINNICZEK"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 10
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Notas_Anti-Disparo.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Notas_Ponte-Rolante ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Notas_Ponte-Rolante"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "MANUT_PONTE"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "PWINNICZEK"
+        session.findById("wnd[1]/usr/txtENAME-LOW").SetFocus()
+        session.findById("wnd[1]/usr/txtENAME-LOW").caretPosition = 10
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Notas_Ponte-Rolante.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Subst_Fusivel_Trip ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Subst_Fusivel_Trip"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "SUBST_TRIP"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "PWINNICZEK"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 10
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Subst_Fusivel_Trip.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Revisao_Manual_Subestacao ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Revisao_Manual_Subestacao"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "REV_MANUAL"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "PWINNICZEK"
+        session.findById("wnd[1]/usr/txtENAME-LOW").SetFocus()
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 10
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Revisao_Manual_Subestacao.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Trip_VCC_3AP ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Trip_VCC_3AP"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "TRIP_VCC_SF6"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "PWINNICZEK"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 12
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Trip_VCC_3AP.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Instalação Proteção Contra Animais ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Instalação Proteção Contra Animais"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "INST_PROT_ANIM"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "PWINNICZEK"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 14
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Instalação Proteção Contra Animais.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## NotasN6_Abertas ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "NotasN6_Abertas"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "X_N6_ABERT"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "PWINNICZEK"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 10
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/NotasN6_Abertas.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Notas_Oficio_82_2023 ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Notas_Oficio_82_2023"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "Y_OFICIO082023"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "PWINNICZEK"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 14
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Notas_Oficio_82_2023.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Tratamento_Oleo_REC_SEC ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Tratamento_Oleo_REC_SEC"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").text = "TRAT-OLEO"
+        session.findById("wnd[1]/usr/txtENAME-LOW").text = "KASCHIEWALDT"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 5
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Tratamento_Oleo_REC_SEC.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Disjuntores_Alarme_Mola ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Disjuntores_Alarme_Mola"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "SINALIZ-MOLA"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "KASCHIEWALDT"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 12
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Disjuntores_Alarme_Mola.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Verificacao_Prot_Barras_GIS ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Verificacao_Prot_Barras_GIS"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "VERIF-PROT-BR"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "KASCHIEWALDT"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 13
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Verificacao_Prot_Barras_GIS.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Adequação_Circuito_Eletrico_ESOU ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Adequação_Circuito_Eletrico_ESOU"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "ADEQ-CIRC-ESO"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "KASCHIEWALDT"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 13
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Adequação_Circuito_Eletrico_ESOU.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Notas_Analise-IOC ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Notas_Analise-IOC"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "ESTUDO_IOC"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "PWINNICZEK"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 10
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/AnalisedeOM/Documentos%20compartidos/General/01%20-%20Indicadores/01%20-%20Power%20BI/12%20-%20Teleassistência/Notas_Analise-IOC.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Plano-Acao_IOC_Adicional ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Plano-Acao_IOC_Adicional"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "IOC-ADIC"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "PWINNICZEK"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 10
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/AnalisedeOM/Documentos%20compartidos/General/01%20-%20Indicadores/01%20-%20Power%20BI/12%20-%20Teleassistência/Plano-Acao_IOC_Adicional.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Plano-Acao_IOC ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "Plano-Acao_IOC"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/niw29"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/tbar[1]/btn[17]").press()
+        session.findById("wnd[1]/usr/txtV-LOW").Text = "PLANO-IOC"
+        session.findById("wnd[1]/usr/txtENAME-LOW").Text = "PWINNICZEK"
+        session.findById("wnd[1]/usr/txtV-LOW").caretPosition = 9
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/AnalisedeOM/Documentos%20compartidos/General/01%20-%20Indicadores/01%20-%20Power%20BI/12%20-%20Teleassistência/Plano-Acao_IOC.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## IH08 - Equipamentos ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "IH08 - Equipamentos"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]").resizeWorkingPane(93, 32, False)
+        session.findById("wnd[0]/tbar[0]/okcd").Text = "/nih08"
+        session.findById("wnd[0]").sendVKey(0)
+        session.findById("wnd[0]/usr/ctxtEQUNR-LOW").Text = "*"
+        session.findById("wnd[0]/usr/ctxtVARIANT").Text = "/BI-EQTOS"
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell (- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").Select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").SetFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/IH08 - Equipamentos.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## IH08 - Completa ###################################
+try:
+    # Emular as ações do VBA
+    file_name = "IH08 - Completa"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").clearSelection()
+        session.findById("wnd[0]/tbar[1]/btn[38]").press()
+        session.findById("wnd[1]/usr/subSUB_DYN0500:SAPLSKBH:0600/btnAPP_FL_SING").press()
+        session.findById("wnd[1]/usr/subSUB_DYN0500:SAPLSKBH:0600/btnAPP_FL_SING").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(- 1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").SelectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/IH08 - Completa.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+            print(f"*********************************************************************")
+            print(f"Não foi possível atualizar o arquivo: {file_name} !")
+            print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+            print(f"*********************************************************************\n")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            pass
+############################## Ensaios_CG ###################################
+import pandas as pd
+import os
+import pyautogui
+import time
+import pygetwindow as gw
+import win32com.client
+
+file_name = "Ensaios_CG"
+print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+
+# Localização do arquivo da planilha na rede
+caminho_planilha = "C:/Users/soulan/INTERCONEXION ELECTRICA S.A. E.S.P/Base de Dados - ISA CTEEP - Manutenção - 01. Bases de Dados/IH08 - Equipamentos.xlsx"
+
+# Carregando a planilha em um DataFrame
+df = pd.read_excel(caminho_planilha)
+
+# Aplicando os filtros
+tipos_objeto_tecnico = ["EQU-TRAFOP", "EQU-AUTOTR", "EQU-TRRG", "EQU-TRPATZ", "EQU-REACTO"]
+empresas_excluir = ["IEMA", "IEGA"]
+
+df_filtrado = df[df['Tipo de objeto'].isin(tipos_objeto_tecnico) & ~df['Empresa'].isin(empresas_excluir)]
+
+# Copiando os dados da coluna "Equipamento" para uma variável temporária
+equipamentos = df_filtrado['Equipamento'].astype(str).str.cat(sep='\n')
+
+# Convertendo os dados copiados em uma lista
+lista_equipamentos = equipamentos.split('\n')
+
+if session:
+
+    # CG
+    session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+    session.findById("wnd[0]/tbar[0]/okcd").text = "/nik07"
+    session.findById("wnd[0]").sendVKey(0)
+    session.findById("wnd[0]/usr/btn%_EQUNR_%_APP_%-VALU_PUSH").press()
+
+else:
+    print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+if session:
+    for equipamento in lista_equipamentos:
+        try:
+            # Limpar e definir o texto no campo de equipamento
+            campo_equipamento = session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,0]")
+            campo_equipamento.text = ""  # Limpar o campo
+            campo_equipamento.text = equipamento  # Definir o texto com o equipamento
+
+            # Realizar a operação no SAP
+            session.findById("wnd[1]/tbar[0]/btn[13]").press()
+            session.findById("wnd[1]").sendVKey(13)
+
+        except Exception as e:
+            print("Erro ao processar equipamento:", equipamento)
+            print(e)
+
+else:
+    print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+try:
+    # Emular as ações do VBA
+    if session:
+
+        # CG
+        #session.findById("wnd[0]").resizeWorkingPane(97, 34, False)
+        #session.findById("wnd[0]/tbar[0]/okcd").text = "/nik07"
+        #session.findById("wnd[0]").sendVKey(0)
+        #session.findById("wnd[0]/usr/btn%_EQUNR_%_APP_%-VALU_PUSH").press()
+        #session.findById("wnd[1]/tbar[0]/btn[24]").press()
+        session.findById("wnd[1]/tbar[0]/btn[8]").press()
+        session.findById("wnd[0]/usr/ctxtVARIANT").text = "/LAB_CG"
+        session.findById("wnd[0]/usr/ctxtVARIANT").setFocus()
+        session.findById("wnd[0]/usr/ctxtVARIANT").caretPosition = 7
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(-1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectAll()
+        session.findById("wnd[0]/tbar[1]/btn[44]").press()
+        session.findById("wnd[0]/usr/txtSELCOUNT").text = "500"
+        session.findById("wnd[0]/usr/ctxtVARIANT").text = "/FFC_QUALIF"
+        session.findById("wnd[0]/usr/ctxtVARIANT").setFocus()
+        session.findById("wnd[0]/usr/ctxtVARIANT").caretPosition = 11
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(-1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").setFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+except Exception:
+    print(f"*********************************************************************")
+    print(f"Não foi possível atualizar o arquivo: {file_name} !")
+    print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+    print(f"*********************************************************************\n")
+    wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+    pass
+
+try:
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs(
+                "https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Ensaios_CG.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+
+except Exception:
+    print(f"*********************************************************************")
+    print(f"Não foi possível atualizar o arquivo: {file_name} !")
+    print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+    print(f"*********************************************************************\n")
+    wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+    pass
+############################## Ensaios_FQ ###################################
+
+# FQ
+try:
+    file_name = "Ensaios_FQ"
+    print(f"O processo de atualização do arquivo * {file_name} * está em andamento.")
+    if session:
+        session.findById("wnd[0]/tbar[0]/btn[3]").press()
+        session.findById("wnd[0]/tbar[0]/btn[3]").press()
+        session.findById("wnd[0]/tbar[0]/btn[3]").press()
+        session.findById("wnd[0]/usr/ctxtVARIANT").text = "/LAB_FQ"
+        session.findById("wnd[0]/usr/ctxtVARIANT").setFocus()
+        session.findById("wnd[0]/usr/ctxtVARIANT").caretPosition = 7
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(-1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectAll()
+        session.findById("wnd[0]/tbar[1]/btn[44]").press()
+        session.findById("wnd[0]/usr/txtSELCOUNT").text = "500"
+        session.findById("wnd[0]/usr/ctxtVARIANT").text = "/FFC_QUALIF"
+        session.findById("wnd[0]/usr/ctxtVARIANT").setFocus()
+        session.findById("wnd[0]/usr/ctxtVARIANT").caretPosition = 11
+        session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(-1, "")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectAll()
+        session.findById("wnd[0]/tbar[1]/btn[16]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").select()
+        session.findById("wnd[1]/usr/subSUBSCREEN_STEPLOOP:SAPLSPO5:0150/sub:SAPLSPO5:0150/radSPOPLI-SELFLAG[0,0]").setFocus()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        session.findById("wnd[1]/tbar[0]/btn[0]").press()
+    else:
+        print("Não foi possível estabelecer uma sessão com o SAP GUI.")
+
+    # Inicializa a aplicação Excel
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    # Itera sobre todas as pastas de trabalho abertas
+    for wb in excel.Workbooks:
+        if wb.Name == 'Planilha em Basis (1)':  # Verifica se o nome da pasta de trabalho é o desejado
+            # Salva a pasta de trabalho no local especificado
+            wb.SaveAs("https://isaempresas.sharepoint.com/sites/BasedeDados-ISACTEEP-Manuteno/Documentos%20compartidos/Manutenção/01.%20Bases%20de%20Dados/Ensaios_FQ.xlsx")
+            wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+            break  # Termina o loop depois de encontrar a pasta de trabalho desejada
+
+    # Fecha a aplicação Excel se não houver mais pastas de trabalho abertas
+    if not excel.Workbooks:
+        excel.Quit()
+    # Adiciona um atraso de 3 segundos
+    time.sleep(3)
+    print(f"Processo concluído com sucesso. Arquivo: {file_name}\n")
+except Exception:
+    print(f"*********************************************************************")
+    print(f"Não foi possível atualizar o arquivo: {file_name} !")
+    print(f"Alguém pode estar com o arquivo {file_name} aberto, favor verificar.")
+    print(f"*********************************************************************\n")
+    wb.Close()  # Fecha apenas a pasta de trabalho com o nome especificado
+    pass
+
