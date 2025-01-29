@@ -1,7 +1,4 @@
-# Atualizacao_BIs_Automatic
-🚀 Automação para extração e tratamento de dados do SAP usando Python. O projeto otimiza processos empresariais, reduz tempo manual e melhora a qualidade dos dados. Tecnologias: Python, SAP GUI Scripting, Excel e Power BI. 📊
-
-📌 Atualização_Bls_Automatic
+📌 Atualizacao_Bls_Automatic
 🚀 Este repositório contém um projeto de automação para extração e tratamento de dados do SAP utilizando Python. O objetivo é otimizar processos empresariais, reduzir tempo manual e garantir a padronização das informações para análise e tomada de decisão.
 
 📌 Objetivos
@@ -26,19 +23,19 @@ Power BI para visualização e análise
 🔹 Padronização e confiabilidade dos dados para análise
 
 📌 Como Executar
-1️⃣ Clone o repositório:
+🔹 1. Clone o repositório
 
 bash
 Copiar
 Editar
-git clone https://github.com/Debrito97/Atualizacao_Bls_Automati.git
-2️⃣ Instale as dependências:
+git clone https://github.com/Debrito97/Atualizacao_Bls_Automatic.git
+🔹 2. Instale as dependências
 
 bash
 Copiar
 Editar
 pip install -r requirements.txt
-3️⃣ Execute o script principal:
+🔹 3. Execute o script principal
 
 bash
 Copiar
